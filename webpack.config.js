@@ -1,3 +1,4 @@
+const path = require("path");
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const htmlPlugin = new HtmlWebPackPlugin({
     template: './src/index.html',
@@ -6,19 +7,29 @@ const htmlPlugin = new HtmlWebPackPlugin({
 
 module.exports = {
     mode: "development",
-    module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-                loader: "babel-loader"
-            }
-        },
-        {
-            test: /\.css$/,
-            use: ["style-loader", "css-loader"]
-        }
-        ]
+    entry: "./src/index.tsx",
+    output: { path: path.join(__dirname, "dist"), filename: "index.bundle.js" },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js"],
     },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ["babel-loader"],
+            },
+            {
+                 test: /\.tsx?$/, loader: "ts-loader" 
+            },
+            {
+                test: /\.(css|scss)$/,
+                use: ["style-loader", "css-loader"],
+            },
+        ],
+    },
+    devServer: {
+        historyApiFallback: true,
+      },
     plugins: [htmlPlugin]
 };
