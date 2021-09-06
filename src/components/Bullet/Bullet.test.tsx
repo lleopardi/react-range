@@ -9,7 +9,6 @@ describe('When load de component', () => {
             id='min'
             onDrag={jest.fn}
             onDragEnd={jest.fn}
-            onDragStart={jest.fn}
             position={0}
         />);
 
@@ -25,7 +24,6 @@ describe('When the user interact with the component', () => {
             id='min'
             onDrag={onDrag}
             onDragEnd={jest.fn}
-            onDragStart={jest.fn}
             position={0}
         />);
 
@@ -39,7 +37,6 @@ describe('When the user interact with the component', () => {
         const {getByTestId} = render(<Bullet
             id='min'
             onDrag={onDrag}
-            onDragStart={onDragStart}
             onDragEnd={jest.fn}
             position={0}
         />);
@@ -55,7 +52,6 @@ describe('When the user interact with the component', () => {
         const {getByTestId} = render(<Bullet
             id='min'
             onDrag={onDrag}
-            onDragStart={onDragStart}
             onDragEnd={onDragEnd}
             position={0}
         />);
