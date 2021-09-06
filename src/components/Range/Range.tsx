@@ -112,14 +112,6 @@ const Range = ({ filter, label, onFilter }: RangeProps) => {
         };
     };
 
-
-    const onDragStart = (event: React.DragEvent<HTMLDivElement>) => {
-        let img = new Image();
-        img.src =
-            "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=";
-        event.dataTransfer.setDragImage(img, 0, 0);
-    };
-
     const onDragEnd = (event: React.DragEvent<HTMLDivElement>) => {
         onFilter(currentFilter);
         event.preventDefault();
@@ -141,14 +133,12 @@ const Range = ({ filter, label, onFilter }: RangeProps) => {
                 
                 <Bullet
                     id={"min"}
-                    onDragStart={onDragStart}
                     onDrag={onNewDrag}
                     onDragEnd={onDragEnd}
                     position={newCurrentPosition.min}
                 />
                 <Bullet
                     id={"max"}
-                    onDragStart={onDragStart}
                     onDrag={onNewDrag}
                     onDragEnd={onDragEnd}
                     position={newCurrentPosition.max}
