@@ -17,32 +17,33 @@ const NormalFilter = () => {
             setFilter(data.filter);
             setIsLoading(false);
         })
-        
+
     }, []);
 
-    const onFilter = (newFilter: {min: number, max: number}) => {
+    const onFilter = (newFilter: { min: number, max: number }) => {
         setNewFilter({ ...newFilter })
-        
+
     }
 
     const renderRange = () => {
-        if(isLoading){
+        if (isLoading) {
             return <div>Loading...</div>;
-        }else{
-            return <Range filter={filter} label="€" onFilter={onFilter} ></Range>;
+        } else {
+            return (
+                <div className="normal-range">
+                    <Range filter={filter} label="€" onFilter={onFilter} ></Range>
+                    <div>
+                        New Filter: {newFilter.min} / {newFilter.max}
+                    </div>
+                </div>
+            );
         }
     }
 
     return (
         <div className="container-normal-range">
             <h1>Range with normal limit this one has a min and max property</h1>
-            <div className="normal-range">
-                {renderRange()}
-            </div>
-
-            <div>
-                New Filter: {newFilter.min} / {newFilter.max}
-            </div>
+            {renderRange()}
         </div>
     );
 }

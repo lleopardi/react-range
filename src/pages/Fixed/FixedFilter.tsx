@@ -18,7 +18,7 @@ const FixedFilter = () => {
         });
     }, []);
 
-    const onFilter = (newFilter: {min: number, max: number}) => {
+    const onFilter = (newFilter: { min: number, max: number }) => {
         setNewFilter({ ...newFilter })
     }
 
@@ -26,20 +26,23 @@ const FixedFilter = () => {
         if (isLoading) {
             return <div>Loading...</div>;
         } else {
-            return <Range filter={filter} label="€" onFilter={onFilter} ></Range>;
+            return (
+                <div className="fixed-range">
+                    <Range filter={filter} label="€" onFilter={onFilter} ></Range>
+                    <div>
+                        New Filter: {newFilter.min} / {newFilter.max}
+                    </div>
+                </div>
+            );
         }
     }
 
     return (
         <div className="container-fixed-range">
             <h1>Range with Fixed limit this one has a array of values</h1>
-            <div className="fixed-range">
-                {renderRange()}
-            </div>
 
-            <div>
-                New Filter: {newFilter.min} / {newFilter.max}
-            </div>
+            {renderRange()}
+
         </div>
     );
 }
