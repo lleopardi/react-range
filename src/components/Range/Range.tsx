@@ -20,7 +20,7 @@ interface filterNormal {
     max: number;
 }
 
-type RangeProps = {
+interface RangeProps {
     filter: any;
     label: string;
     onFilter: (filter: filterNormal) => void;
