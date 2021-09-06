@@ -7,8 +7,17 @@
     bottom:-5px;
 }
 
-.bullet:hover {
+.grab {
     width: 20px;
     height: 20px;
     bottom: -6px;
+    cursor: grab;
+
+}
+
+.grabbing {
+    width: 20px;
+    height: 20px;
+    bottom: -6px;
+    cursor: grabbing;
 }
