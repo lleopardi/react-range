@@ -1,0 +1,10 @@
+.container-normal-range{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.normal-range {
+    width: 300px;
+}
