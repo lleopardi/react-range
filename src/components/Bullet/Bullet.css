@@ -1,0 +1,14 @@
+.bullet {
+    width: 18px;
+    height: 18px;
+    background: black;
+    border-radius: 15px;
+    position: absolute;
+    bottom:-5px;
+}
+
+.bullet:hover {
+    width: 20px;
+    height: 20px;
+    bottom: -6px;
+}
