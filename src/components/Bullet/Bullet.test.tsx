@@ -18,45 +18,93 @@ describe('When load de component', () => {
 });
 
 describe('When the user interact with the component', () => {
-    test('should execute onDrag event', () => {
+
+    test('should add the class grabbing on mouseDown', () => {
         const onDrag = jest.fn();
-        const {getByTestId} = render(<Bullet
+        const { getByTestId } = render(<Bullet
             id='min'
             onDrag={onDrag}
             onDragEnd={jest.fn}
             position={0}
         />);
-
-        fireEvent.drag(getByTestId("bullet"), {bubbles: true});
-        expect(onDrag).toHaveBeenCalled();        
+        fireEvent.mouseDown(getByTestId("bullet"), { bubbles: true });
+        const classes = document.getElementById('min').className;
+        expect(classes).toContain('grabbing');
     });
 
-    test('should execute onDragStart event', () => {
+    test('should add the class grabbing on mouseMove', () => {
         const onDrag = jest.fn();
-        const onDragStart = jest.fn();
-        const {getByTestId} = render(<Bullet
+        const { getByTestId } = render(<Bullet
             id='min'
             onDrag={onDrag}
             onDragEnd={jest.fn}
             position={0}
         />);
-
-        fireEvent.dragStart(getByTestId("bullet"), {bubbles: true});
-        expect(onDragStart).toHaveBeenCalled();        
+        fireEvent.mouseDown(getByTestId("bullet"), { bubbles: true });
+        fireEvent.mouseMove(getByTestId("bullet"), { bubbles: true });
+        const classes = document.getElementById('min').className;
+        expect(classes).toContain('grabbing');
+        expect(onDrag).toHaveBeenCalled();
     });
 
-    test('should execute onDragEnd event', () => {
+    test('should add the class grab on mouseUp', () => {
         const onDrag = jest.fn();
-        const onDragStart = jest.fn();
         const onDragEnd = jest.fn();
-        const {getByTestId} = render(<Bullet
+        const { getByTestId } = render(<Bullet
             id='min'
             onDrag={onDrag}
             onDragEnd={onDragEnd}
             position={0}
         />);
-
-        fireEvent.dragEnd(getByTestId("bullet"), {bubbles: true});
-        expect(onDragEnd).toHaveBeenCalled();        
+        fireEvent.mouseDown(getByTestId("bullet"), { bubbles: true });
+        fireEvent.mouseMove(getByTestId("bullet"), { bubbles: true });
+        fireEvent.mouseUp(getByTestId("bullet"), { bubbles: true });
+        const classes = document.getElementById('min').className;
+        expect(classes).toContain('grab');
+        expect(onDragEnd).toHaveBeenCalled();
     });
+
+    test('should add the class grab on mouseEnter', () => {
+        const onDrag = jest.fn();
+        const onDragEnd = jest.fn();
+        const { getByTestId } = render(<Bullet
+            id='min'
+            onDrag={onDrag}
+            onDragEnd={onDragEnd}
+            position={0}
+        />);
+        fireEvent.mouseEnter(getByTestId("bullet"), { bubbles: true });
+        const classes = document.getElementById('min').className;
+        expect(classes).toContain('grab');
+    });
+
+    test('should remove the class grab/grabbing on mouseLeave', () => {
+        const onDrag = jest.fn();
+        const onDragEnd = jest.fn();
+        const { getByTestId } = render(<Bullet
+            id='min'
+            onDrag={onDrag}
+            onDragEnd={onDragEnd}
+            position={0}
+        />);
+        fireEvent.mouseLeave(getByTestId("bullet"), { bubbles: true });
+        const classes = document.getElementById('min').className;
+        expect(classes).not.toContain('grab');
+        expect(classes).not.toContain('grabbing');
+    });
+
+    test('should not call onDrag method if not clicked the bullet', () => {
+        const onDrag = jest.fn();
+        const onDragEnd = jest.fn();
+        const { getByTestId } = render(<Bullet
+            id='min'
+            onDrag={onDrag}
+            onDragEnd={onDragEnd}
+            position={0}
+        />);
+        fireEvent.mouseMove(getByTestId("bullet"), { bubbles: true });
+        const classes = document.getElementById('min').className;
+        expect(onDrag).toHaveBeenCalledTimes(0);
+    });
+
 });

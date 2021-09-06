@@ -32,9 +32,9 @@ const Bullet = ({ onDrag, onDragEnd, position, id }: BulletProps) => {
     }
 
     const handlerOnMouseUp = (event: React.DragEvent<HTMLDivElement>) => {
-        onDragEnd(event);
         setIsPressed(false);
         setCursorStyle(CursorStyle.grab);
+        onDragEnd(event);
         event.preventDefault();
     }
 
